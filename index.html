@@ -131,14 +131,11 @@ body{
 ========================================= */
 
 .envelope{
-
     position:relative;
-
     width:380px;
-
-    height:260px;
-
+    height:240px;
     transform-style:preserve-3d;
+}
 
     filter:drop-shadow(0 28px 40px rgba(0,0,0,.18));
 
@@ -147,25 +144,19 @@ body{
 /* ตัวซอง */
 
 .envelope-body{
-
     position:absolute;
-
     left:0;
-
     bottom:0;
 
     width:100%;
-
-    height:200px;
+    height:180px;
 
     background:#efb0c4;
 
     border-radius:0 0 18px 18px;
 
     overflow:hidden;
-
 }
-
 /* หน้าซอง */
 
 .envelope-body::before{
@@ -310,25 +301,22 @@ body{
 
     position:absolute;
 
-    left:22px;
-    right:22px;
+    left:18px;
+    right:18px;
 
     bottom:18px;
 
-    height:280px;
+    height:220px;
 
-    transform:translateY(120px);
+    transform:translateY(95px);
 
-    transition:1.2s cubic-bezier(.23,1,.32,1);
+    transition:1s;
 
     z-index:5;
 
 }
-
 .envelope.open .letter{
-
-    transform:translateY(-120px);
-
+    transform:translateY(-90px);
 }
 
 .paper{
