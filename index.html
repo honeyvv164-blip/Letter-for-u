@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For You ❤️</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    font-family:'Prompt',sans-serif;
+}
+
+body{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:linear-gradient(
+        135deg,
+        #ffd8e8,
+        #ffe9f3,
+        #fff7fb
+    );
+
+    position:relative;
+
+}
+
+/* =========================
+   BACKGROUND
+========================= */
+
+.background{
+
+    position:fixed;
+    inset:0;
+
+    background:
+
+    radial-gradient(circle at 20% 20%,
+    rgba(255,255,255,.8),
+    transparent 35%),
+
+    radial-gradient(circle at 80% 30%,
+    rgba(255,255,255,.5),
+    transparent 30%),
+
+    radial-gradient(circle at 50% 90%,
+    rgba(255,255,255,.6),
+    transparent 40%);
+
+    animation:bgMove 12s ease-in-out infinite alternate;
+
+}
+
+.sparkles{
+
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+
+}
+
+.sparkles::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-100%;
+
+    background-image:
+    radial-gradient(white 1px,transparent 1px);
+
+    background-size:40px 40px;
+
+    opacity:.35;
+
+    animation:sparkle 20s linear infinite;
+
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.container{
+
+    width:360px;
+    height:500px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    position:relative;
+    z-index:5;
+
+}
+
+/* =========================
+   ENVELOPE
+========================= */
+
+.envelope{
+
+    position:relative;
+
+    width:320px;
+    height:220px;
+
+    transform-style:preserve-3d;
+
+}
+
+/* ตัวซอง */
+
+.envelope-body{
+
+    position:absolute;
+
+    bottom:0;
+
+    width:100%;
+    height:170px;
+
+    background:#f6c6d5;
+
+    border-radius:0 0 18px 18px;
+
+    overflow:hidden;
+
+    box-shadow:
+
+    0 25px 45px rgba(0,0,0,.15);
+
+}
+
+/* ด้านหน้าซอง */
+
+.envelope-body::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    background:#efb0c4;
+
+    clip-path:polygon(
+        0 0,
+        50% 58%,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+
+}
+
+/* ฝาซอง */
+
+.flap{
+
+    position:absolute;
+
+    top:0;
+
+    width:100%;
+    height:120px;
+
+    background:#f4b8cb;
+
+    clip-path:polygon(
+        0 0,
+        100% 0,
+        50% 100%
+    );
+
+    transform-origin:top center;
+
+    transition:1.2s cubic-bezier(.25,.8,.25,1);
+
+    z-index:10;
+
+}
+
+/* ตราประทับ */
+
+.seal{
+
+    position:absolute;
+
+    left:50%;
+    top:58%;
+
+    transform:translate(-50%,-50%);
+
+    width:70px;
+    height:70px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        145deg,
+        #ff5b87,
+        #d81b60
+    );
+
+    color:white;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:30px;
+
+    cursor:pointer;
+
+    box-shadow:
+
+    0 10px 25px rgba(0,0,0,.2),
+
+    inset 0 2px 8px rgba(255,255,255,.4);
+
+    transition:.5s;
+
+    z-index:20;
+
+}
+
+/* =========================
+   LETTER
+========================= */
+
+.letter{
+
+    position:absolute;
+
+    left:18px;
+    right:18px;
+
+    bottom:18px;
+
+    height:280px;
+
+    transform:translateY(150px);
+
+    transition:1.3s cubic-bezier(.25,.8,.25,1);
+
+    z-index:5;
+
+}
+
+.paper{
+
+    width:100%;
+    height:100%;
+
+    background:white;
+
+    border-radius:14px;
+
+    padding:28px;
+
+    box-shadow:
+
+    0 20px 45px rgba(0,0,0,.15);
+
+}
+
+.paper h1{
+
+    color:#ff6796;
+    text-align:center;
+    margin-bottom:25px;
+
+}
+
+.paper p{
+
+    color:#666;
+    line-height:2;
+    font-size:18px;
+
+}
+
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes bgMove{
+
+from{
+
+transform:scale(1);
+
+}
+
+to{
+
+transform:scale(1.08);
+
+}
+
+}
+
+@keyframes sparkle{
+
+from{
+
+transform:translateY(0);
+
+}
+
+to{
+
+transform:translateY(-300px);
+
+}
+
+}
+/* =========================
+   OPEN ANIMATION
+========================= */
+
+.envelope.open .flap{
+    transform:rotateX(180deg);
+}
+
+.envelope.open .letter{
+    transform:translateY(-110px);
+}
+
+/* =========================
+   HEARTS
+========================= */
+
+.heart{
+
+    position:fixed;
+
+    font-size:22px;
+
+    pointer-events:none;
+
+    animation:heartFly 3s ease-out forwards;
+
+    z-index:999;
+
+}
+
+@keyframes heartFly{
+
+    0%{
+
+        transform:
+        translateY(0)
+        scale(.5);
+
+        opacity:0;
+
+    }
+
+    20%{
+
+        opacity:1;
+
+    }
+
+    100%{
+
+        transform:
+        translateY(-260px)
+        translateX(var(--x))
+        rotate(25deg)
+        scale(1.5);
+
+        opacity:0;
+
+    }
+
+}
+
+/* =========================
+   PETALS
+========================= */
+
+.petal{
+
+    position:fixed;
+
+    top:-40px;
+
+    font-size:22px;
+
+    pointer-events:none;
+
+    animation:petalFall linear forwards;
+
+    z-index:2;
+
+}
+
+@keyframes petalFall{
+
+    0%{
+
+        transform:
+        translateX(0)
+        translateY(0)
+        rotate(0deg);
+
+    }
+
+    25%{
+
+        transform:
+        translateX(20px)
+        translateY(25vh)
+        rotate(90deg);
+
+    }
+
+    50%{
+
+        transform:
+        translateX(-25px)
+        translateY(50vh)
+        rotate(180deg);
+
+    }
+
+    75%{
+
+        transform:
+        translateX(30px)
+        translateY(75vh)
+        rotate(270deg);
+
+    }
+
+    100%{
+
+        transform:
+        translateX(-20px)
+        translateY(110vh)
+        rotate(360deg);
+
+    }
+
+}
+
+/* =========================
+   LETTER
+========================= */
+
+.paper{
+
+    overflow:auto;
+
+}
+
+.paper::-webkit-scrollbar{
+
+    display:none;
+
+}
+
+.paper h1{
+
+    animation:fadeIn 1.2s ease;
+
+}
+
+.paper p{
+
+    animation:fadeIn 2s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* =========================
+   SHADOW
+========================= */
+
+.envelope{
+
+    filter:
+    drop-shadow(0 25px 35px rgba(0,0,0,.15));
+
+}
+
+.paper{
+
+    background:
+
+    linear-gradient(
+        white,
+        #fffafc
+    );
+
+}
+
+.seal:hover{
+
+    transform:
+    translate(-50%,-50%)
+    scale(1.08);
+
+}
+
+.flap{
+
+    box-shadow:
+
+    inset 0 8px 15px rgba(255,255,255,.35);
+
+}
+
+.envelope-body{
+
+    box-shadow:
+
+    0 20px 40px rgba(0,0,0,.18);
+
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:480px){
+
+.container{
+
+    transform:scale(.9);
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="sparkles"></div>
+
+<div class="petals"></div>
+
+<div class="container">
+
+    <div class="envelope" id="envelope">
+
+        <!-- ฝาซอง -->
+        <div class="flap"></div>
+
+        <!-- ตัวซอง -->
+        <div class="envelope-body">
+
+            <!-- ตราประทับ -->
+            <div class="seal" id="seal">
+                ❤
+            </div>
+
+        </div>
+
+        <!-- จดหมาย -->
+        <div class="letter" id="letter">
+
+            <div class="paper">
+
+                <h1>ถึงเธอ 🤍</h1>
+
+                <p id="message">
+                    ขอบคุณที่เปิดซองจดหมายนี้นะ<br><br>
+
+                    ขอให้ทุกวันของเธอเต็มไปด้วยรอยยิ้ม
+                    และมีความสุขเสมอ 🌸
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<audio id="openSound">
+    <source src="open.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* ===========================
+   SURPRISE LETTER
+=========================== */
+
+const envelope = document.getElementById("envelope");
+const seal = document.getElementById("seal");
+const flap = document.querySelector(".flap");
+const letter = document.getElementById("letter");
+const message = document.getElementById("message");
+const sound = document.getElementById("openSound");
+
+let opened = false;
+
+/* ข้อความ */
+const text = `ขอบคุณที่เปิดซองจดหมายนี้นะ ❤️
+
+ขอให้ทุกวันของเธอเต็มไปด้วยรอยยิ้ม
+
+ไม่ว่าจะเหนื่อยแค่ไหน
+
+ก็อย่าลืมว่า...
+
+ยังมีคนคนหนึ่ง
+คอยเป็นกำลังใจให้เสมอ 🌸`;
+
+message.innerHTML = "";
+
+/* เปิดซอง */
+
+seal.addEventListener("click", () => {
+
+    if(opened) return;
+
+    opened = true;
+
+    if(sound){
+        sound.play().catch(()=>{});
+    }
+
+    /* ตราประทับแตก */
+
+    seal.animate([
+        {
+            transform:"translate(-50%,-50%) scale(1)",
+            opacity:1
+        },
+        {
+            transform:"translate(-50%,-50%) scale(2) rotate(30deg)",
+            opacity:0
+        }
+    ],{
+        duration:500,
+        fill:"forwards"
+    });
+
+    /* เปิดฝา */
+
+    setTimeout(()=>{
+
+        envelope.classList.add("open");
+
+    },300);
+
+    /* หัวใจ */
+
+    setTimeout(createHearts,700);
+
+    /* พิมพ์ข้อความ */
+
+    setTimeout(typeMessage,1200);
+
+});
+
+/* ===========================
+   TYPEWRITER
+=========================== */
+
+function typeMessage(){
+
+    let i=0;
+
+    function typing(){
+
+        if(i<text.length){
+
+            if(text[i]=="\n"){
+
+                message.innerHTML+="<br>";
+
+            }else{
+
+                message.innerHTML+=text[i];
+
+            }
+
+            i++;
+
+            setTimeout(typing,40);
+
+        }
+
+    }
+
+    typing();
+
+}
+
+/* ===========================
+   HEART
+=========================== */
+
+function createHearts(){
+
+    for(let i=0;i<20;i++){
+
+        let heart=document.createElement("div");
+
+        heart.className="heart";
+
+        heart.innerHTML="❤️";
+
+        heart.style.left=(window.innerWidth/2+(Math.random()*200-100))+"px";
+
+        heart.style.top=(window.innerHeight/2+80)+"px";
+
+        heart.style.setProperty("--x",(Math.random()*160-80)+"px");
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+
+            heart.remove();
+
+        },3000);
+
+    }
+
+}
+
+/* ===========================
+   PETALS
+=========================== */
+
+function createPetal(){
+
+    let petal=document.createElement("div");
+
+    petal.className="petal";
+
+    petal.innerHTML="🌸";
+
+    petal.style.left=Math.random()*100+"vw";
+
+    petal.style.fontSize=(18+Math.random()*12)+"px";
+
+    petal.style.animationDuration=(6+Math.random()*4)+"s";
+
+    document.body.appendChild(petal);
+
+    setTimeout(()=>{
+
+        petal.remove();
+
+    },10000);
+
+}
+
+setInterval(createPetal,350);
+
+</script>
+
+</body>
+
+</html>
